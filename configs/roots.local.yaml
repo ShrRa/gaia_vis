@@ -1,0 +1,5 @@
+data: /home/alex/Data/Work/Sources/gaia_vis/data
+features: /home/alex/Data/Work/Sources/gaia_vis/features
+predictions: /home/alex/Data/Work/Sources/gaia_vis/predictions
+models: /home/alex/Data/Work/Sources/gaia_vis/models
+misc: /home/alex/Data/Work/Sources/gaia_vis/misc

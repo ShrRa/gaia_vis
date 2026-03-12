@@ -1,0 +1,15 @@
+artifacts:
+  dr3_sample_v1:
+    format: parquet
+    hash: sha256:866944836e47e461ea5145b0fefbe0bc158d5df3799a7544201e268970ef7220
+    inputs: []
+    notes: 10000 random rows from gaiadr3.gaia_source
+    path: dr3_sample_v1.parquet
+    root: data
+    tags:
+    - dr3
+    - sample
+    type: data
+    updated_at: '2026-03-12T18:47:35+01:00'
+    updated_by: alex
+registry_version: 1
