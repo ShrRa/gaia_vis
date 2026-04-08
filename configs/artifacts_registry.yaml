@@ -17,4 +17,31 @@ artifacts:
     type: data
     updated_at: '2026-03-12T21:07:01+01:00'
     updated_by: alex
+  dr3_sample_v2:
+    format: parquet
+    hash: sha256:5cfbfa9bc9db7c7d29830ee955629de9d8a4e58dce7f9b3be4f7d954ba8f8da6
+    inputs: []
+    notes: '97151 random rows from gaiadr3.gaia_source crossmached with external.gaiaedr3_distance
+      to get Bailer-Jones distance estimates.    Columns: [''source_id'', ''ra'',
+      ''ra_error'', ''dec'', ''dec_error'', ''parallax'', ''parallax_error'', ''parallax_over_error'',
+      ''pm'', ''pmra'', ''pmra_error'', ''pmdec'', ''pmdec_error'', ''phot_g_mean_flux'',
+      ''phot_g_mean_flux_error'', ''phot_g_mean_flux_over_error'', ''phot_g_mean_mag'',
+      ''phot_bp_mean_flux'', ''phot_bp_mean_flux_error'', ''phot_bp_mean_flux_over_error'',
+      ''phot_bp_mean_mag'', ''phot_rp_mean_flux'', ''phot_rp_mean_flux_error'', ''phot_rp_mean_flux_over_error'',
+      ''phot_rp_mean_mag'', ''bp_rp'', ''bp_g'', ''g_rp'', ''radial_velocity'', ''radial_velocity_error'',
+      ''phot_variable_flag'', ''l'', ''b'', ''ecl_lon'', ''ecl_lat'', ''in_qso_candidates'',
+      ''in_galaxy_candidates'', ''non_single_star'', ''teff_gspphot'', ''teff_gspphot_lower'',
+      ''teff_gspphot_upper'', ''logg_gspphot'', ''logg_gspphot_lower'', ''logg_gspphot_upper'',
+      ''mh_gspphot'', ''mh_gspphot_lower'', ''mh_gspphot_upper'', ''distance_gspphot'',
+      ''distance_gspphot_lower'', ''distance_gspphot_upper''] plus all columns from
+      external.gaiaedr3_distance.'
+    path: dr3_sample_v2.parquet
+    root: data
+    tags:
+    - bailer-jones
+    - dr3
+    - sample
+    type: data
+    updated_at: '2026-04-08T17:20:02+02:00'
+    updated_by: alex
 registry_version: 1
