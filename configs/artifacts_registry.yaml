@@ -18,8 +18,13 @@ artifacts:
     updated_at: '2026-03-12T21:07:01+01:00'
     updated_by: alex
   dr3_sample_v2:
+    archived:
+    - archived_at: '2026-04-10T19:30:20+02:00'
+      hash: sha256:5cfbfa9bc9db7c7d29830ee955629de9d8a4e58dce7f9b3be4f7d954ba8f8da6
+      notes: auto-archived on overwrite
+      path: _archive/dr3_sample_v2__20260410T173020Z__5cfbfa9bc9.parquet
     format: parquet
-    hash: sha256:5cfbfa9bc9db7c7d29830ee955629de9d8a4e58dce7f9b3be4f7d954ba8f8da6
+    hash: sha256:a2ec7f5989cf57c1747119c40b60103b9931d42876937ea70fc786fe52ccc614
     inputs: []
     notes: '97151 random rows from gaiadr3.gaia_source crossmached with external.gaiaedr3_distance
       to get Bailer-Jones distance estimates.    Columns: [''source_id'', ''ra'',
@@ -42,6 +47,6 @@ artifacts:
     - dr3
     - sample
     type: data
-    updated_at: '2026-04-08T17:20:02+02:00'
+    updated_at: '2026-04-10T19:30:20+02:00'
     updated_by: alex
 registry_version: 1
