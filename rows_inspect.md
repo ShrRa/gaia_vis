@@ -103,7 +103,7 @@ In an animation context, the **direction** of the proper motion vector (the angl
 | 45 | mh_gspphot | -4.1503 | 0.8 | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
 | 46 | mh_gspphot_lower | -4.1505 | 0.7999 | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
 | 47 | mh_gspphot_upper | -4.1498 | 0.8001 | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
-| 48 | distance_gspphot | 1.3011 | 36165.09 | 1340950508 | float32 | **float16 recommended for 3D viz** (not just "viable"): float16's non-uniform precision is actually *well-matched* to visual importance — excellent sub-pc precision at 1–100 pc where Galactic neighborhood structure is most visible, ~0.1% relative error at 36000 pc where individual star positions are visually indistinguishable. This is a case where float16 is arguably better-suited to viz than float32 |
-| 49 | distance_gspphot_lower | 1.3006 | 35664.418 | 1340950508 | float32 | **float16 recommended for 3D viz**: same reasoning as distance_gspphot |
-| 50 | distance_gspphot_upper | 1.3013 | 36337.793 | 1340950508 | float32 | **float16 recommended for 3D viz**: same reasoning as distance_gspphot |
-| 51 | r_med_photogeo | 1.3019346 | 79661.01 | 121123187 | float32 | float32 required: max 79661 pc overflows float16 (max 65504). If storage is critical and a transform is acceptable: log10(r_med_photogeo) stored as float16 fits (range ~1.7–4.9) with ~0.003% relative precision across all distances — useful for log-depth rendering layers |
+| 48 | distance_gspphot | 1.3011 | 36165.09 | 1340950508 | float32 | float16 |
+| 49 | distance_gspphot_lower | 1.3006 | 35664.418 | 1340950508 | float32 | float16 |
+| 50 | distance_gspphot_upper | 1.3013 | 36337.793 | 1340950508 | float32 | float16 |
+| 51 | r_med_photogeo | 1.3019346 | 79661.01 | 121123187 | float32 |  |
