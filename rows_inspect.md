@@ -54,56 +54,55 @@ In an animation context, the **direction** of the proper motion vector (the angl
 
 ---
 
-| # | column | min | max | nulls | Alex (lossless) | Notes: can be smaller for visualization |
-|---|--------|-----|-----|-------|-----------------|-----------------------------------------|
-| 1 | source_id | 4295806720 | 6917528997577384000 | 0 | uint64 | |
-| 2 | ra | 3.4096239126626443e-7 | 359.999999939548 | 0 | float32 | **Important:** must be high, otherwise jittering could appear when zooming  |
-| 3 | ra_error | 0.0035371692 | 99.997635 | 0 | float32 | **float16**: 0.004–100 mas → ~1600 levels; ULP ≈ 0.06 at max |
-| 4 | dec | -89.99287859590359 | 89.99005196682685 | 0 | float32 | **Important:** must be high, otherwise jittering could appear when zooming |
-| 5 | dec_error | 0.0042951643 | 99.97974 | 0 | float32 | **float16**: same as ra_error |
-| 6 | parallax | -187.02939637423492 | 768.0665391873573 | 343964953 | float32 |  |
-| 7 | parallax_error | 0.0071899574 | 5.802274 | 343964953 | float32 | **float16**: 0.007–5.8 mas → ~1450 levels; ULP ≈ 0.004 at max |
-| 8 | parallax_over_error | -161.38797 | 15400.477 | 343964953 | float32 or float16 | **float16**: Alex also suggests it; quality indicator, 3 sig digits sufficient |
-| 9 | pm | 0.00019370936 | 10393.349 | 343964953 | float32 | **float16**: 0–10393 mas/yr → ~1900 levels; ULP ≈ 8 at max. |
-| 10 | pmra | -4406.469178827325 | 6765.995136250774 | 343964953 | float32 | **float16**: same as pm | 
-| 11 | pmra_error | 0.0039596637 | 3.447368 | 343964953 | float32 | **float16**: 0–3.4 mas/yr → ~850 levels; ULP ≈ 0.002 at max |
-| 12 | pmdec | -5817.8001940492695 | 10362.394206546573 | 343964953 | float32 | **float16**: same as pm |
-| 13 | pmdec_error | 0.0052927267 | 3.4449604 | 343964953 | float32 | **float16**: same as pmra_error |
-| 14 | phot_g_mean_flux | 12.370194398444749 | 3822116782.6336956 | 5455339 | float32 |  |
-| 15 | phot_g_mean_flux_error | 0.27475065 | 61207728 | 5455339 | float32 |  |
-| 16 | phot_g_mean_flux_over_error | 1.0823672 | 22926.803 | 5455339 | float32 or float16 | **float16**: Alex also suggests it; max 22927 < 65504; ULP ≈ 2 at max |
-| 17 | phot_g_mean_mag | 1.731607 | 22.956425 | 5455339 | float32 or int16×0.001 | **int16×0.001 preferred over float16**: uniform 1 mmag steps map cleanly to colormap LUTs; |
-| 18 | phot_bp_mean_flux | 1.0050400371436263 | 1500432409.3837109 | 269676299 | float32 |  |
-| 19 | phot_bp_mean_flux_error | 0 | 71123240 | 269676299 | float32 |  |
-| 20 | phot_bp_mean_flux_over_error | 0.053431902 | 94195456 | 269676302 | float32 or float16 |  |
-| 21 | phot_bp_mean_mag | 2.3980012 | 25.333084 | 269676299 | float32 or int16×0.001 | **int16×0.001 preferred**: same reasoning as phot_g_mean_mag |
-| 22 | phot_rp_mean_flux | 1.0489614290056928 | 1591127209.4126902 | 256711832 | float32 |  |
-| 23 | phot_rp_mean_flux_error | 0 | 89607720 | 256711832 | float32 |  |
-| 24 | phot_rp_mean_flux_over_error | 0.054578356 | 81374416 | 256711835 | float32 or float16 | float32 required: max 8.1×10⁷ overflows float16 |
-| 25 | phot_rp_mean_mag | 1.7436333 | 24.695997 | 256711832 | float32 or int16×0.001 | **int16×0.001 preferred**: same reasoning as phot_g_mean_mag |
-| 26 | bp_rp | -7.3475304 | 10.193149 | 270939282 | float32 or int16×0.001 | **int16×0.001 preferred over float16**: color is the primary visual encoding for star type — uniform 1 mmag steps map cleanly to colormap indices.  |
-| 27 | bp_g | -8.431045 | 7.015131 | 269681608 | float32 or int16×0.001 | **int16×0.001 preferred**: same reasoning as bp_rp |
-| 28 | g_rp | -4.8746176 | 11.520412 | 260559960 | float32 or int16×0.001 | **int16×0.001 preferred**: same reasoning as bp_rp |
-| 29 | radial_velocity | -906.6071 | 914.7007 | 1777897588 | float32 | **float16**: ±914 km/s; ULP ≈ 0.06 km/s at max, Gaia RVS precision is 0.1–1 km/s |
-| 30 | radial_velocity_error | 0.11300004 | 39.99959 | 1777897588 | float32 | **float16**: 0.11–40 km/s; ULP ≈ 0.03 at max |
-| 31 | phot_variable_flag | OBJECT - char | | | uint8 (or 4-flag bitfield) |  |
-| 32 | l | 1.0606335061246415e-7 | 359.9999999850258 | 0 | float32 |  |
-| 33 | b | -89.99366530605397 | 89.98796453163729 | 0 | float32 |  |
-| 34 | ecl_lon | 5.21887866629631e-7 | 359.99999810830957 | 0 | float32 |  |
-| 35 | ecl_lat | -89.99954651413846 | 89.99008000608518 | 0 | float32 |  |
-| 36 | in_qso_candidates | False | True | | uint8 (or 4-flag bitfield) | bool (1 byte); Alex suggests packing all 4 flag columns into a single uint8 bitfield |
-| 37 | in_galaxy_candidates | False | True | | uint8 (or 4-flag bitfield) | bool; same note as in_qso_candidates |
-| 38 | non_single_star | 0 | 7 | 0 | uint8 (or 4-flag bitfield) | **uint8**; Important! Alex's suggestion of 4 bitfield is not valid in this case because values of this field are accutaly between 0 and 7 and all values occure |
-| 39 | teff_gspphot | 2501.1814 | 41504.02 | 1340950508 | float32 or uint16 | **uint16 preferred over float16**: stores exact integer K values, making LUT-based temperature-to-color (blackbody) mapping trivial  |
-| 40 | teff_gspphot_lower | 2500.3027 | 41460.203 | 1340950508 | float32 or uint16 | **uint16 preferred**: same reasoning as teff_gspphot |
-| 41 | teff_gspphot_upper | 2503.5662 | 41532.008 | 1340950508 | float32 or uint16 | **uint16 preferred**: same reasoning as teff_gspphot |
-| 42 | logg_gspphot | -0.5 | 5.4957 | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
-| 43 | logg_gspphot_lower | -0.5 | 5.487 | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
-| 44 | logg_gspphot_upper | -0.4999 | 5.4992 | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
-| 45 | mh_gspphot | -4.1503 | 0.8 | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
-| 46 | mh_gspphot_lower | -4.1505 | 0.7999 | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
-| 47 | mh_gspphot_upper | -4.1498 | 0.8001 | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
-| 48 | distance_gspphot | 1.3011 | 36165.09 | 1340950508 | float32 | float16 |
-| 49 | distance_gspphot_lower | 1.3006 | 35664.418 | 1340950508 | float32 | float16 |
-| 50 | distance_gspphot_upper | 1.3013 | 36337.793 | 1340950508 | float32 | float16 |
-| 51 | r_med_photogeo | 1.3019346 | 79661.01 | 121123187 | float32 |  |
+| # | column | min | max | hist (linear) | hist (log) | nulls | Alex (lossless) | Notes: can be smaller for visualization |
+|---|--------|-----|-----|---------------|------------|-------|-----------------|-----------------------------------------|
+| 1 | source_id | 4295806720 | 6917528997577384000 | | | 0 | uint64 | |
+| 2 | ra | 3.4096239126626443e-7 | 359.999999939548 | <img src="plots/hist_ra_linear.png" style="min-width:300px; width:500px"> | | 0 | float32 | **Important:** must be high, otherwise jittering could appear when zooming  |
+| 3 | ra_error | 0.0035371692 | 99.997635 | <img src="plots/hist_ra_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_ra_error_log.png" style="min-width:300px; width:500px"> | 0 | float32 | **float16**: 0.004–100 mas → ~1600 levels; ULP ≈ 0.06 at max |
+| 4 | dec | -89.99287859590359 | 89.99005196682685 | <img src="plots/hist_dec_linear.png" style="min-width:300px; width:500px"> | | 0 | float32 | **Important:** must be high, otherwise jittering could appear when zooming |
+| 5 | dec_error | 0.0042951643 | 99.97974 | <img src="plots/hist_dec_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_dec_error_log.png" style="min-width:300px; width:500px"> | 0 | float32 | **float16**: same as ra_error |
+| 6 | parallax | -187.02939637423492 | 768.0665391873573 | <img src="plots/hist_parallax_linear.png" style="min-width:300px; width:500px"> | | 343964953 | float32 |  |
+| 7 | parallax_error | 0.0071899574 | 5.802274 | <img src="plots/hist_parallax_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_parallax_error_log.png" style="min-width:300px; width:500px"> | 343964953 | float32 | **float16**: 0.007–5.8 mas → ~1450 levels; ULP ≈ 0.004 at max |
+| 8 | parallax_over_error | -161.38797 | 15400.477 | <img src="plots/hist_parallax_over_error_linear.png" style="min-width:300px; width:500px"> | | 343964953 | float32 or float16 | **float16**: Alex also suggests it; quality indicator, 3 sig digits sufficient |
+| 9 | pm | 0.00019370936 | 10393.349 | <img src="plots/hist_pm_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_pm_log.png" style="min-width:300px; width:500px"> | 343964953 | float32 | **float16**: 0–10393 mas/yr → ~1900 levels; ULP ≈ 8 at max. |
+| 10 | pmra | -4406.469178827325 | 6765.995136250774 | <img src="plots/hist_pmra_linear.png" style="min-width:300px; width:500px"> | | 343964953 | float32 | **float16**: same as pm |
+| 11 | pmra_error | 0.0039596637 | 3.447368 | <img src="plots/hist_pmra_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_pmra_error_log.png" style="min-width:300px; width:500px"> | 343964953 | float32 | **float16**: 0–3.4 mas/yr → ~850 levels; ULP ≈ 0.002 at max |
+| 12 | pmdec | -5817.8001940492695 | 10362.394206546573 | <img src="plots/hist_pmdec_linear.png" style="min-width:300px; width:500px"> | | 343964953 | float32 | **float16**: same as pm |
+| 13 | pmdec_error | 0.0052927267 | 3.4449604 | <img src="plots/hist_pmdec_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_pmdec_error_log.png" style="min-width:300px; width:500px"> | 343964953 | float32 | **float16**: same as pmra_error |
+| 14 | phot_g_mean_flux | 12.370194398444749 | 3822116782.6336956 | <img src="plots/hist_phot_g_mean_flux_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_phot_g_mean_flux_log.png" style="min-width:300px; width:500px"> | 5455339 | float32 |  |
+| 15 | phot_g_mean_flux_error | 0.27475065 | 61207728 | <img src="plots/hist_phot_g_mean_flux_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_phot_g_mean_flux_error_log.png" style="min-width:300px; width:500px"> | 5455339 | float32 |  |
+| 16 | phot_g_mean_flux_over_error | 1.0823672 | 22926.803 | <img src="plots/hist_phot_g_mean_flux_over_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_phot_g_mean_flux_over_error_log.png" style="min-width:300px; width:500px"> | 5455339 | float32 or float16 | **float16**: Alex also suggests it; max 22927 < 65504; ULP ≈ 2 at max |
+| 17 | phot_g_mean_mag | 1.731607 | 22.956425 | <img src="plots/hist_phot_g_mean_mag_linear.png" style="min-width:300px; width:500px"> | | 5455339 | float32 or int16×0.001 | **int16×0.001 preferred over float16**: uniform 1 mmag steps map cleanly to colormap LUTs; |
+| 18 | phot_bp_mean_flux | 1.0050400371436263 | 1500432409.3837109 | <img src="plots/hist_phot_bp_mean_flux_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_phot_bp_mean_flux_log.png" style="min-width:300px; width:500px"> | 269676299 | float32 |  |
+| 19 | phot_bp_mean_flux_error | 0 | 71123240 | <img src="plots/hist_phot_bp_mean_flux_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_phot_bp_mean_flux_error_log.png" style="min-width:300px; width:500px"> | 269676299 | float32 |  |
+| 20 | phot_bp_mean_flux_over_error | 0.053431902 | 94195456 | <img src="plots/hist_phot_bp_mean_flux_over_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_phot_bp_mean_flux_over_error_log.png" style="min-width:300px; width:500px"> | 269676302 | float32 or float16 |  |
+| 21 | phot_bp_mean_mag | 2.3980012 | 25.333084 | <img src="plots/hist_phot_bp_mean_mag_linear.png" style="min-width:300px; width:500px"> | | 269676299 | float32 or int16×0.001 | **int16×0.001 preferred**: same reasoning as phot_g_mean_mag |
+| 22 | phot_rp_mean_flux | 1.0489614290056928 | 1591127209.4126902 | <img src="plots/hist_phot_rp_mean_flux_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_phot_rp_mean_flux_log.png" style="min-width:300px; width:500px"> | 256711832 | float32 |  |
+| 23 | phot_rp_mean_flux_error | 0 | 89607720 | <img src="plots/hist_phot_rp_mean_flux_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_phot_rp_mean_flux_error_log.png" style="min-width:300px; width:500px"> | 256711832 | float32 |  |
+| 24 | phot_rp_mean_flux_over_error | 0.054578356 | 81374416 | <img src="plots/hist_phot_rp_mean_flux_over_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_phot_rp_mean_flux_over_error_log.png" style="min-width:300px; width:500px"> | 256711835 | float32 or float16 | float32 required: max 8.1×10⁷ overflows float16 |
+| 25 | phot_rp_mean_mag | 1.7436333 | 24.695997 | <img src="plots/hist_phot_rp_mean_mag_linear.png" style="min-width:300px; width:500px"> | | 256711832 | float32 or int16×0.001 | **int16×0.001 preferred**: same reasoning as phot_g_mean_mag |
+| 26 | bp_rp | -7.3475304 | 10.193149 | <img src="plots/hist_bp_rp_linear.png" style="min-width:300px; width:500px"> | | 270939282 | float32 or int16×0.001 | **int16×0.001 preferred over float16**: color is the primary visual encoding for star type — uniform 1 mmag steps map cleanly to colormap indices.  |
+| 27 | bp_g | -8.431045 | 7.015131 | <img src="plots/hist_bp_g_linear.png" style="min-width:300px; width:500px"> | | 269681608 | float32 or int16×0.001 | **int16×0.001 preferred**: same reasoning as bp_rp |
+| 28 | g_rp | -4.8746176 | 11.520412 | <img src="plots/hist_g_rp_linear.png" style="min-width:300px; width:500px"> | | 260559960 | float32 or int16×0.001 | **int16×0.001 preferred**: same reasoning as bp_rp |
+| 29 | radial_velocity | -906.6071 | 914.7007 | <img src="plots/hist_radial_velocity_linear.png" style="min-width:300px; width:500px"> | | 1777897588 | float32 | **float16**: ±914 km/s; ULP ≈ 0.06 km/s at max, Gaia RVS precision is 0.1–1 km/s |
+| 30 | radial_velocity_error | 0.11300004 | 39.99959 | <img src="plots/hist_radial_velocity_error_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_radial_velocity_error_log.png" style="min-width:300px; width:500px"> | 1777897588 | float32 | **float16**: 0.11–40 km/s; ULP ≈ 0.03 at max |
+| 31 | phot_variable_flag | OBJECT - char | | | | | uint8 (or 4-flag bitfield) |  |
+| 32 | l | 1.0606335061246415e-7 | 359.9999999850258 | <img src="plots/hist_l_linear.png" style="min-width:300px; width:500px"> | | 0 | float32 |  |
+| 33 | b | -89.99366530605397 | 89.98796453163729 | <img src="plots/hist_b_linear.png" style="min-width:300px; width:500px"> | | 0 | float32 |  |
+| 34 | ecl_lon | 5.21887866629631e-7 | 359.99999810830957 | <img src="plots/hist_ecl_lon_linear.png" style="min-width:300px; width:500px"> | | 0 | float32 |  |
+| 35 | ecl_lat | -89.99954651413846 | 89.99008000608518 | <img src="plots/hist_ecl_lat_linear.png" style="min-width:300px; width:500px"> | | 0 | float32 |  |
+| 36 | in_qso_candidates | False | True | | | | uint8 (or 4-flag bitfield) | bool (1 byte); Alex suggests packing all 4 flag columns into a single uint8 bitfield |
+| 37 | in_galaxy_candidates | False | True |  | | | uint8 (or 4-flag bitfield) | bool; same note as in_qso_candidates |
+| 38 | non_single_star | 0 | 7 |  | | 0 | uint8 (or 4-flag bitfield) | **uint8**; Important! Alex's suggestion of 4 bitfield is not valid in this case because values of this field are accutaly between 0 and 7 and all values occure |
+| 39 | teff_gspphot | 2501.1814 | 41504.02 | <img src="plots/hist_teff_gspphot_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_teff_gspphot_log.png" style="min-width:300px; width:500px"> | 1340950508 | float32 or uint16 | **uint16 preferred over float16**: stores exact integer K values, making LUT-based temperature-to-color (blackbody) mapping trivial  |
+| 40 | teff_gspphot_lower | 2500.3027 | 41460.203 | <img src="plots/hist_teff_gspphot_lower_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_teff_gspphot_lower_log.png" style="min-width:300px; width:500px"> | 1340950508 | float32 or uint16 | **uint16 preferred**: same reasoning as teff_gspphot |
+| 41 | teff_gspphot_upper | 2503.5662 | 41532.008 | <img src="plots/hist_teff_gspphot_upper_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_teff_gspphot_upper_log.png" style="min-width:300px; width:500px"> | 1340950508 | float32 or uint16 | **uint16 preferred**: same reasoning as teff_gspphot |
+| 42 | logg_gspphot | -0.5 | 5.4957 | <img src="plots/hist_logg_gspphot_linear.png" style="min-width:300px; width:500px"> | | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
+| 43 | logg_gspphot_lower | -0.5 | 5.487 | <img src="plots/hist_logg_gspphot_lower_linear.png" style="min-width:300px; width:500px"> | | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
+| 44 | logg_gspphot_upper | -0.4999 | 5.4992 | <img src="plots/hist_logg_gspphot_upper_linear.png" style="min-width:300px; width:500px"> | | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
+| 45 | mh_gspphot | -4.1503 | 0.8 | <img src="plots/hist_mh_gspphot_linear.png" style="min-width:300px; width:500px"> | | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
+| 46 | mh_gspphot_lower | -4.1505 | 0.7999 | <img src="plots/hist_mh_gspphot_lower_linear.png" style="min-width:300px; width:500px"> | | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
+| 47 | mh_gspphot_upper | -4.1498 | 0.8001 | <img src="plots/hist_mh_gspphot_upper_linear.png" style="min-width:300px; width:500px"> | | 1340950508 | float32 or int16×0.001 | **int16×0.001 preferred over float16** |
+| 48 | distance_gspphot | 1.3011 | 36165.09 | <img src="plots/hist_distance_gspphot_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_distance_gspphot_log.png" style="min-width:300px; width:500px"> | 1340950508 | float32 | float16 |
+| 49 | distance_gspphot_lower | 1.3006 | 35664.418 | <img src="plots/hist_distance_gspphot_lower_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_distance_gspphot_lower_log.png" style="min-width:300px; width:500px"> | 1340950508 | float32 | float16 |
+| 50 | distance_gspphot_upper | 1.3013 | 36337.793 | <img src="plots/hist_distance_gspphot_upper_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_distance_gspphot_upper_log.png" style="min-width:300px; width:500px"> | 1340950508 | float32 | float16 |
