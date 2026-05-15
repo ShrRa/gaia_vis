@@ -106,3 +106,5 @@ In an animation context, the **direction** of the proper motion vector (the angl
 | 48 | distance_gspphot | 1.3011 | 36165.09 | <img src="plots/hist_distance_gspphot_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_distance_gspphot_log.png" style="min-width:300px; width:500px"> | 1340950508 | float32 | float16 |
 | 49 | distance_gspphot_lower | 1.3006 | 35664.418 | <img src="plots/hist_distance_gspphot_lower_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_distance_gspphot_lower_log.png" style="min-width:300px; width:500px"> | 1340950508 | float32 | float16 |
 | 50 | distance_gspphot_upper | 1.3013 | 36337.793 | <img src="plots/hist_distance_gspphot_upper_linear.png" style="min-width:300px; width:500px"> | <img src="plots/hist_distance_gspphot_upper_log.png" style="min-width:300px; width:500px"> | 1340950508 | float32 | float16 |
+
+Histograms are generated from sample data from GAIA archive with 900.000 rows.
